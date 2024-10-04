@@ -1,6 +1,9 @@
 // Jacob D Reeder
 // CS 410
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SequentialSearch {
 
     private String text;
@@ -27,15 +30,20 @@ public class SequentialSearch {
 
     // Count occurrences of a word
     public static int countOccurrences(String text, String word) {
-        int index = 0;
-        int count = 0;
-        word = word.toLowerCase();
-        text = text.toLowerCase();
+        // Convert to lowercase for case-insensitive search
+        String lowerText = text.toLowerCase();
+        String lowerWord = word.toLowerCase();
 
-        while ((index = text.indexOf(word, index)) != -1) {
-            count++;
-            index += word.length();
+        // Use regex to find whole word occurrences
+        String regex = "\\b" + Pattern.quote(lowerWord) + "\\b"; // \\b for word boundaries
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(lowerText);
+
+        int count = 0;
+        while (matcher.find()) {
+            count++; // Increment the count for each match found
         }
-        return count;
+
+        return count; // Return the total count of occurrences
     }
 }
