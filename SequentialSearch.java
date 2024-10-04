@@ -3,8 +3,8 @@
 
 public class SequentialSearch {
 
-    private final String text;
-    private final String[] words;
+    private String text;
+    private String[] words;
 
     public SequentialSearch(String text, String[] words) {
         this.text = text;
